@@ -32,19 +32,20 @@ public class SchoolLeft{
         
         Scanner input = new Scanner(System.in);
         
-        System.out.println("Do you want to count from the beginning to the end or from now to the end?");
-        System.out.print("Type '1' for beginning or '2' for now: ");
+        System.out.println("Do you want to count from the beginning to the end or from the current date to the end?");
+        System.out.print("Type '1' for beginning or '2' for current: ");
         sOrC = input.nextInt();
         
         if(sOrC == 1){
-            System.out.println("When did the school year start?");
+            
+            System.out.println("When did the school year begin?");
             System.out.print("Year: ");
             sYear = input.nextInt();
             System.out.print("Month: ");
             sMonth = input.nextInt();
             System.out.print("Day: ");
             sDay = input.nextInt();
-            System.out.println("When did the school year end?");
+            System.out.println("When does the school year end?");
             System.out.print("Year: ");
             eYear = input.nextInt();
             System.out.print("Month: ");
@@ -65,7 +66,31 @@ public class SchoolLeft{
             
         }
         else if (sOrC == 2){
+            System.out.println("What is the current date?");
+            System.out.print("Year: ");
+            cYear = input.nextInt();
+            System.out.print("Month: ");
+            cMonth = input.nextInt();
+            System.out.print("Day: ");
+            cDay = input.nextInt();
+            System.out.println("When does the school year end?");
+            System.out.print("Year: ");
+            eYear = input.nextInt();
+            System.out.print("Month: ");
+            eMonth = input.nextInt();
+            System.out.print("Day: ");
+            eDay = input.nextInt();
             
+            yearsPassed = eYear - cYear;
+            monthsPassed = eMonth - cMonth;
+            daysPassed = eDay - cDay;
+        
+            daysPassed =+ (yearsPassed * 365) + (monthsPassed * 30);
+            hoursPassed = daysPassed * 24;
+            
+            dateOne = "" + cMonth + "/" + cDay + "/" + cYear;
+            dateTwo = "" + eMonth + "/" + eDay + "/" + eYear;
+            System.out.println(daysPassed);
         }
         
         System.out.println("Type the most recent line shown");
@@ -85,7 +110,7 @@ public class SchoolLeft{
         schoolHourLeftNoVacation = schoolPerWeek * (daysPassed2 / 7);
         
         
-        System.out.println("There is " + schoolHourLeftNoVacation + " left between " + dateOne + " and " + dateTwo);
+        System.out.println("There is " + schoolHourLeftNoVacation + "hr of classtime between " + dateOne + " and " + dateTwo);
         System.out.println("This does NOT include inconsistent breaks (i.e. Winter Break or Spring Break)");
 
 

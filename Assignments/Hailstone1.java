@@ -19,7 +19,6 @@ public class Hailstone1{
          //System.out.println("I: " + i);
             if(temp1 == 4 && temp2 == 2){
                isTrue[i] = 1; //1 = true; 0 = false
-               turnCount[i] = tempCount;
                tempReturn = 1;
             }else{
                temp1 = tempCurrent;
@@ -30,12 +29,14 @@ public class Hailstone1{
                }
                temp2 = tempCurrent;
                tempCount++;
+               //System.out.println("tempCount: " + tempCount);
             }
             if(temp1 !=4 || temp2 !=2){
                isTrue[i] = 0;
             }
          }
          tempReturn = 0;
+         turnCount[i] = tempCount;
          tempCount = 0;
       }
       
@@ -45,17 +46,19 @@ public class Hailstone1{
       avgIsTrue /= 200;
       //System.out.println("\navgIsTrue: " + avgIsTrue);
       
-      for(int f = 0; f < 200; f++){
+      /*for(int f = 0; f < 200; f++){
          if(turnCount[f] > tempHighest){
             tempHighest = turnCount[f];
             highestNum = f;
+            System.out.println("highestnum: " + highestNum);
+            System.out.println("temphighest: " + tempHighest);
          }
       }
-     
+     */
       
       if(avgIsTrue == 1){
          System.out.println("All numbers within 1-200 eventually reach the loop.");
-         System.out.println("Highest Amount Of turns used was " + tempHighest + " on number " + highestNum);
+         //System.out.println("Highest Amount Of turns used was " + tempHighest + " on number " + highestNum);
       } else {
          System.out.println("Only some numbers reach the loop.");
       }

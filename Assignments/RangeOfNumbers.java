@@ -19,8 +19,10 @@ public class RangeOfNumbers{
       } else {
          direction = 1;
       }
-      System.out.print(start);
-      temp = start;
+      if(direction != 0){
+         System.out.print(start);
+         temp = start;
+      }
       while(direction != 0 && temp!= end){
          temp = temp + direction;
          System.out.print(", " + temp);

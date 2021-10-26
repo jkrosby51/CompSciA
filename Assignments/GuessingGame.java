@@ -1,5 +1,6 @@
 import java.util.*;
 public class GuessingGame{
+   public static final int maxNum = 100;
    public static void main(String[] args){
       Scanner input = new Scanner(System.in);
       boolean play = true;
@@ -7,22 +8,27 @@ public class GuessingGame{
       boolean quit = false;
       int gameCount = 1;
       int totalGuess = 0;
-      int[] guessPerGame = new int[100];
+      int[] guessPerGame = new int[maxNum];
       int bestGame = 100;
       int temp1 = 0;
+      System.out.println("This program allows you to guess random numbers.");
+      System.out.println("I will think of a number between 1 and 100");
+      System.out.println("and you will try to guess it.");
+      System.out.println("After each guess, I will give you a clue about");
+      System.out.println("whether the correct number is higher or lower.");
       
       while(quit == false){
          if(play == false){
-            System.out.println("Would you like to play again?");
+            System.out.print("Do you want to play again? ");
             userInput = input.nextLine();
             userInput = userInput.toLowerCase();
-            System.out.println(userInput);
+            //System.out.println(userInput);
+            System.out.println("");
             if(userInput.startsWith("y")){
                play = true;
                gameCount++;
                
             } else {
-               System.out.println("I'll take that as a no, goodbye!");
                quit = true;
                
             }
@@ -46,26 +52,27 @@ public class GuessingGame{
    public static int guessingGame(int temp1){
       Scanner input = new Scanner(System.in);
       Random random = new Random();
-      int rndmNum = random.nextInt(100 - 1) + 1;
+      int rndmNum = random.nextInt(maxNum - 1) + 1;
       int userGuess = 0;
       int guessCount = 0;
-      System.out.println("\nHi, welcome to the game!\n");
       //System.out.println("Random Number = " + rndmNum);
+      System.out.println("I'm thinking of a number between 1 and " + maxNum + "...");
       for (int i = 1; userGuess != rndmNum; i++){
-         System.out.print("Enter a number between 1 and 100: ");
+         System.out.print("Your guess? ");
+         
          userGuess = input.nextInt();
          if(userGuess == rndmNum){
             if(i == 1){
                System.out.println("You got it first try!");
                temp1 = i;
             } else {
-               System.out.println("You guessed correctly in " + i + " guesses.");
+               System.out.println("You got it right in " + i + " guesses!");
                temp1 = i;
             }
          } else if(userGuess > rndmNum){
-            System.out.println("It's Lower");
+            System.out.println("It's lower.");
          } else if(userGuess < rndmNum){
-            System.out.println("It's Higher");
+            System.out.println("It's higher.");
          }
       }
       return temp1;

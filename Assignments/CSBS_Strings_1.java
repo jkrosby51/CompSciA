@@ -1,5 +1,4 @@
 //Finish toRomanNumeral()
-//In isRotation the loop is broken
 
 import java.util.*;
 public class CSBS_Strings_1 {
@@ -59,9 +58,9 @@ public class CSBS_Strings_1 {
             System.out.println("Running isRotation(\"" + val + "\", \"" + potentialRotation + "\")...\n");
             boolean ans = isRotation(val, potentialRotation);
             if (ans == true)
-               System.out.println("\"" + val + "\", \"" + potentialRotation + "\" are rotations of eachother.");
+               System.out.println("\"" + val + "\", \"" + potentialRotation + "\" are rotations of eachother.\n");
             else if(ans == false)
-               System.out.println("\"" + val + "\", \"" + potentialRotation + "\" are not rotations of eachother.");
+               System.out.println("\"" + val + "\", \"" + potentialRotation + "\" are not rotations of eachother.\n");
             wait(2000); 
          } else {
             System.out.println("Invalid Number. Try again.");
@@ -96,11 +95,12 @@ public class CSBS_Strings_1 {
                mVals[i] = Character.toString(tempVal.charAt(i));
             }
             count++;
-            if(tempVal == m)
+            if(tempVal.equals(n))
                ans = true;
+            //System.out.println(tempVal);
          }
       }
-      System.out.println("ans = " + ans);
+      //System.out.println("ans = " + ans);
       return(ans);
    }
    
@@ -124,6 +124,33 @@ public class CSBS_Strings_1 {
    
    public static String toRomanNumeral(int n){
       String ans = "";
+      Map<Integer, String> map
+            = new HashMap<Integer, String>();
+  
+        map.put(1000, "M");
+        map.put(900, "CM");
+        map.put(500, "D");
+        map.put(400, "CD");
+        map.put(100, "C");
+        map.put(90, "XC");
+        map.put(50, "L");
+        map.put(40, "XL");
+        map.put(10, "X");
+        map.put(9, "IX");
+        map.put(5, "V");
+        map.put(4, "IV");
+        map.put(1, "I");
+      
+      String inputN = Integer.toString(n);
+      int length = inputN.length();
+      
+      for(int i = 1; i <= length; i++){
+         ans += map.get(inputN.charAt(i));
+      }
+      
+      if(n < 1)
+         ans = "Your input must be greater than 0";
+      
       return(ans);
    }
    

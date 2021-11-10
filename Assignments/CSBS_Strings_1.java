@@ -1,5 +1,28 @@
-//Finish toRomanNumeral()
+/*All 5 methods from this assignment have been completed and compiled here.
 
+FOR FUTURE ME/OTHER READERS
+
+This file contains the following methods in order of top to bottom in code: 
+                        isRotation, swapPairs, toRomanNumeral, removeAll, countWords
+                        
+In this order, I will explain what can be found in each program.
+
+1. isRotation
+   - moves characters from beginning to end of string repeatedly
+2. swapPairs
+   - splits string into pairs of 2 characters each and flips each pair over.
+3. toRomanNumeral
+   - Uses HashMap which maps variables of different types
+   - uses modulus to single out specific parts of an integer
+4. removeAll
+   - splits string into char array
+   - checks each entry in array to see if it matches with a given char
+5. countWords
+   - checks each character in a string
+   - compares current and past char being checked to see if the word ended
+
+
+*/
 import java.util.*;
 public class CSBS_Strings_1 {
    public static void main(String[] args){

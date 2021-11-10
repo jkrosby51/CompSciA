@@ -124,6 +124,13 @@ public class CSBS_Strings_1 {
    
    public static String toRomanNumeral(int n){
       String ans = "";
+      int temp = 0;
+      int temp2 = 0;
+      boolean temp3 = false;
+      int temp4 = 1;
+      int multiple = 0;
+      int count = 0;
+      
       Map<Integer, String> map
             = new HashMap<Integer, String>();
   
@@ -143,13 +150,57 @@ public class CSBS_Strings_1 {
       
       String inputN = Integer.toString(n);
       int length = inputN.length();
-      
-      for(int i = 1; i <= length; i++){
-         ans += map.get(inputN.charAt(i));
+      String[] numerals = new String[length];
+      if (map.get(n) != null){
+          ans = map.get(n);
       }
+      else if((n % 10) == 0){
+         temp4 = n;
+         for(multiple = 10; temp4 > 0; multiple *= 10){
+            System.out.println(temp4);
+            temp2 = temp4;
+            temp4 = n / multiple;
+         }
+         multiple /= 100;
+         for(int i = temp2; i > 0; i--){
+            System.out.println(multiple);
+            ans = map.get(multiple) + ans;
+         }
       
+      }
+      else{
+          for(int i = 10; count < length; i *= 10){
+             temp = (n % i) - (n % (i / 10)); 
+             if((temp / (i / 10)) != 1 && (temp / (i / 10)) != 4 && (temp / (i / 10)) != 9){
+               temp2 = temp / (i / 10);
+               System.out.println("temp2 = " + temp2);
+                if(temp2 >= 5){
+                  temp2 -= 5;
+                  temp3 = true;
+                }
+                temp = temp / (temp / (i / 10));
+                while(temp2 > 0){
+                   System.out.println(temp);
+                   ans = map.get(temp) + ans;
+                   temp2--;
+                }
+                if(temp3 == true){
+                  ans = map.get(5*(i/10)) + ans;
+                  temp3 = false;
+                  }
+                
+             } else {
+                System.out.println(temp);
+                ans = map.get(temp) + ans;
+             }
+         
+         count++;
+          }
+      }
       if(n < 1)
          ans = "Your input must be greater than 0";
+      else if(n > 3999)
+         ans = "Your input must be less than 4000";
       
       return(ans);
    }

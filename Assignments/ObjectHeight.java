@@ -1,6 +1,6 @@
 //h = 100 - 4.9(t^2) -- equation for height when dropped from 100m for t amount of time.
 import java.util.*;
-public class ObjectHight {
+public class ObjectHeight {
     
     public static void main(String[] args){
         double time;

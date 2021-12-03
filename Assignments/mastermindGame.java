@@ -24,15 +24,16 @@ public class mastermindGame{
       for(int i = 0; i < colorCount; i++)
          colors[i] = random.nextInt(9 - 1) + 1;
       Arrays.sort(colors);
-      /*System.out.print("colors[]: {");              //Shows Color Answers
+      /*
+      System.out.print("colors[]: {");              //Shows Color Answers
       for(int i = 0; i < colorCount; i++)
          System.out.print(colors[i] + ", ");
-      System.out.println("}");
-      */
+      System.out.println("}");                        
+      
       
       for(int i = 0; i < pegCount; i++)
          pegs[i] = colors[random.nextInt(colorCount)];
-      /*System.out.print("pegs[]  : {");              //Shows Peg Answers
+      System.out.print("pegs[]  : {");              //Shows Peg Answers
       for(int i = 0; i < pegCount; i++)
          System.out.print(pegs[i] + ", ");
       System.out.println("}");
@@ -54,16 +55,20 @@ public class mastermindGame{
             for(int a = 0; a < pegCount; a++){
                if(guesses[e] == guesses[a] && e != a)
                   dupe = true;
-               if(guesses[e] == pegs[a] && dupe == false){
-                  correctColors++;
-               }
+               
+            if(guesses[e] == pegs[a] && dupe == false){
+               correctColors++;
+               dupe = true;
             }
          }
+         }
+         
          System.out.println("You have " + correctPegs + " peg(s) correct and " + correctColors + " color(s) correct.");
-         if(correctPegs == pegCount && correctColors == colorCount){
+         if(correctPegs == pegCount){
             System.out.println("\nYou have broken the code in " + (i + 1) + " guesses.");
          }
       }
+      
    ////////////////////////
    }
 }

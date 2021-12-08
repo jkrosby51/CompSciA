@@ -1,17 +1,20 @@
 /*All 3 methods from this assignment have been completed and compiled here.
 
 FOR FUTURE ME/OTHER READERS
-
-This file contains the following methods in order of top to bottom in code: 
-                        e, e, e                        
-In this order, I will explain what can be found in each program.
+                     
+---Each method and it's description---
 
 1. collapsePairs
-   - 
-2. e
-   - 
-3. e
-   -
+   - condenses pairs of two numbers in an array into one number and sorts by even/odd.
+2. countDuplicates
+   - checks how many duplicate numbers are in a given array.
+3. contains
+   - checks if a2 can be found within a1.
+4. kMostFrequent
+   - Shows which number is most frequently found in an array.
+5. isMonotonic
+
+6. numUnique
 
 */
 import java.util.*;
@@ -25,7 +28,7 @@ public class CSBS_12_3_21{
       while(running == false){
          System.out.println("Which method would you like to run?");
          System.out.println("Enter the number matching your selection.");
-         System.out.println("1. countWords\n2. countDuplicates ");
+         System.out.println("1. countWords \n2. countDuplicates \n3. contains \n4. kMostFrequent");
          methodNum = input.nextInt();
          input.nextLine();
          
@@ -63,7 +66,7 @@ public class CSBS_12_3_21{
                System.out.print(", " + ans[e]);
             System.out.print("}\n\n");
             wait(2000);
-         } else if(methodNum == 2) { //   countDuplicates() //////////// UNFINISHED!!!
+         } else if(methodNum == 2) { //   countDuplicates()
             ArrayList<Integer> numSet = new ArrayList<Integer>();
             int temp = 0;
             for(int i = 0; temp != -1; i++){
@@ -90,12 +93,93 @@ public class CSBS_12_3_21{
             int ans = countDuplicates(userInput);
             System.out.println("There are " + ans + " duplicates in your array.");
             wait(2000);
-         } else if(methodNum == 3) { //e()
+         } else if(methodNum == 3) { //contains()
+            ArrayList<Integer> numSet = new ArrayList<Integer>();
+            int temp = 0;
+            System.out.println("Enter the first array.");
+            for(int i = 0; temp != -1; i++){
+               System.out.print("Insert a number between 1 and 50, or type -1 to quit: ");
+               temp = input.nextInt();
+         
+               if(temp >= 1 && temp <= 50){
+                     numSet.add(temp);
+               }else if(temp != -1)
+                  System.out.println("Only values between 1 and 50 are counted.");
+            }  
+            int arrayLength = numSet.size();
+            int a1[] = new int[arrayLength];
+            for(int i = 0; i < arrayLength; i++)
+               a1[i] = numSet.get(i);
 
+            ArrayList<Integer> numSet2 = new ArrayList<Integer>();
+            temp = 0;
+            System.out.println("Enter the second array.");
+            for(int i = 0; temp != -1; i++){
+               System.out.print("Insert a number between 1 and 50, or type -1 to quit: ");
+               temp = input.nextInt();
+         
+               if(temp >= 1 && temp <= 50){
+                     numSet2.add(temp);
+               }else if(temp != -1)
+                  System.out.println("Only values between 1 and 50 are counted.");
+            }  
+            arrayLength = numSet2.size();
+            int a2[] = new int[arrayLength];
+            for(int i = 0; i < arrayLength; i++)
+               a2[i] = numSet2.get(i);
+            
+            System.out.println("Running contains(a1 a2)");
+            int rndmNum = random.nextInt(8 - 4) + 1;
+            for(int e = 0; e <= rndmNum; e++){
+               System.out.print(". ");
+               wait(random.nextInt(750 - 400) + 1);
+            }
+            System.out.println("\n");
+            boolean ans = contains(a1, a2);
+            if(ans == true)
+               System.out.println("a2 can be found within a1.\n");
+            else
+               System.out.println("a2 can not be found within a1.\n");
+            
             wait(2000);
-         }  else {
+         } else if(methodNum == 4){ //kMostFrequent()       COMPLETELY BROKEN ATM!!!!!!!!!!!!!!!!
+            ArrayList<Integer> numSet = new ArrayList<Integer>();
+            int temp = 0;
+            System.out.println("Enter an array of numbers.");
+            for(int i = 0; temp != -1; i++){
+               System.out.print("Insert a number between 1 and 50, or type -1 to quit: ");
+               temp = input.nextInt();
+         
+               if(temp >= 1 && temp <= 50){
+                     numSet.add(temp);
+               }else if(temp != -1)
+                  System.out.println("Only values between 1 and 50 are counted.");
+            }  
+            int arrayLength = numSet.size();
+            int a[] = new int[arrayLength];
+            for(int i = 0; i < arrayLength; i++)
+               a[i] = numSet.get(i);
+               
+            System.out.print("How many numbers would you like to recieve? ");
+            int k = input.nextInt();
+         
+            System.out.println("Running contains(a, k)");
+            int rndmNum = random.nextInt(8 - 4) + 1;
+            for(int e = 0; e <= rndmNum; e++){
+               System.out.print(". ");
+               wait(random.nextInt(750 - 400) + 1);
+            }
+            System.out.println("\n");
+            int[] ans = kMostFrequent(a, k);
+            System.out.print("{" + ans[0]);
+            for(int i = 1; i < ans.length; i++)
+               System.out.print(", " + ans[i]);
+            System.out.println("}");
+            
+            wait(2000);
+         } else 
             System.out.println("Invalid Number. Try again.");
-         } 
+         
       }
    }
    public static int[] collapsePairs(int[] n){
@@ -111,21 +195,81 @@ public class CSBS_12_3_21{
             n[i-1] = 0;
          }
       }
-   return n;
+      return n;
    }
+   
    public static int countDuplicates(int[] n){
       int temp = 0;
-      int duplicateCount = 1;
-      
+      int duplicateCount = 0;
+      int tempNegative = 0;
+      boolean[] checked = new boolean[200];
       
       for(int i = 0; i < n.length; i++){
          temp = n[i];
-         for(int e = 0; e < n.length; e++){
-            if(temp == n[e] && e > i)
-               duplicateCount = 1;
+         tempNegative = temp;
+         if(temp < 0)
+            tempNegative += 100;
+
+         if(checked[tempNegative] != true){
+            for(int e = 0; e < n.length; e++){
+               if(temp == n[e] && e > i)
+                  duplicateCount++;
+            }
          }
+         checked[tempNegative] = true;
       }
       return duplicateCount;
+   }
+   
+   public static boolean contains(int[] a1, int[] a2){
+      boolean found = false;
+      int counter = 0;
+      for(int i = 0; i <= a1.length - a2.length && found == false; i++){
+         counter = 0;
+         //System.out.println("");
+         for(int e = 0; e < a2.length ; e++){
+            if(a1[i+e] == a2[e])
+               counter++;
+            if(counter == a2.length)
+               found = true;
+            //System.out.println("counter: " + counter + "    e: " + e + "    a1: " + a1[i+e]);
+         }
+      }
+      return found;  
+   }
+   
+   public static int[] kMostFrequent(int[] a, int k){ //COMPLETELY BROKEN ATM!!!!!!!!!!!!!!!!!
+      int[] ans = new int[k];
+      int temp = 0;
+      int duplicateCount = 0;
+      int tempNegative = 0;
+      int[] checked = new int[100];
+      for(int o = 0; o < k; o++){
+         for(int i = 0; i < a.length; i++){
+            temp = a[i];
+            tempNegative = temp;
+            if(temp < 0)
+               tempNegative += 50;
+   
+               for(int e = 0; e < a.length; e++){
+                  if(temp == a[e] && e > i)
+                     duplicateCount++;
+               }
+            checked[tempNegative]++;
+         }
+         temp = 0;
+         boolean[] done = new boolean[100];
+         for(int i = 0; i < 100; i++){
+            for(int e = 0; e < k; e++){
+               if(ans[e] == temp)
+                  done[e] = true;
+            }
+            if(checked[i] > temp && done[checked[i]] == false)
+               temp = checked[i];
+         }
+         ans[o] = temp;
+      }
+      return ans;
    }
    
    public static void wait(int ms){

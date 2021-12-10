@@ -28,7 +28,7 @@ public class CSBS_12_3_21{
       while(running == false){
          System.out.println("Which method would you like to run?");
          System.out.println("Enter the number matching your selection.");
-         System.out.println("1. countWords \n2. countDuplicates \n3. contains \n4. kMostFrequent");
+         System.out.println("1. countWords \n2. countDuplicates \n3. contains \n4. kMostFrequent \n5. isMonotonic");
          methodNum = input.nextInt();
          input.nextLine();
          
@@ -142,7 +142,7 @@ public class CSBS_12_3_21{
                System.out.println("a2 can not be found within a1.\n");
             
             wait(2000);
-         } else if(methodNum == 4){ //kMostFrequent()       COMPLETELY BROKEN ATM!!!!!!!!!!!!!!!!
+         } else if(methodNum == 4){ //kMostFrequent()
             ArrayList<Integer> numSet = new ArrayList<Integer>();
             int temp = 0;
             System.out.println("Enter an array of numbers.");
@@ -163,7 +163,7 @@ public class CSBS_12_3_21{
             System.out.print("How many numbers would you like to recieve? ");
             int k = input.nextInt();
          
-            System.out.println("Running contains(a, k)");
+            System.out.println("Running kMostFrequent(a, k)");
             int rndmNum = random.nextInt(8 - 4) + 1;
             for(int e = 0; e <= rndmNum; e++){
                System.out.print(". ");
@@ -177,7 +177,36 @@ public class CSBS_12_3_21{
             System.out.println("}");
             
             wait(2000);
-         } else 
+         } else if(methodNum == 5){
+            ArrayList<Integer> numSet = new ArrayList<Integer>();
+            int temp = 0;
+            System.out.println("Enter an array of numbers.");
+            for(int i = 0; temp != -1; i++){
+               System.out.print("Insert a number between 1 and 50, or type -1 to quit: ");
+               temp = input.nextInt();
+         
+               if(temp >= 1 && temp <= 50){
+                     numSet.add(temp);
+               }else if(temp != -1)
+                  System.out.println("Only values between 1 and 50 are counted.");
+            }  
+            int arrayLength = numSet.size();
+            int a[] = new int[arrayLength];
+            for(int i = 0; i < arrayLength; i++)
+               a[i] = numSet.get(i);
+            
+            System.out.println("Running isMonotonic(array[])");
+            int rndmNum = random.nextInt(8 - 4) + 1;
+            for(int e = 0; e <= rndmNum; e++){
+               System.out.print(". ");
+               wait(random.nextInt(750 - 400) + 1);
+            }
+            System.out.println("\n");
+            boolean ans = isMonotonic(a);
+            System.out.print("isMonotonic = " + ans + ".");
+            
+            wait(2000);
+         } else {
             System.out.println("Invalid Number. Try again.");
          
       }
@@ -238,37 +267,52 @@ public class CSBS_12_3_21{
       return found;  
    }
    
-   public static int[] kMostFrequent(int[] a, int k){ //COMPLETELY BROKEN ATM!!!!!!!!!!!!!!!!!
+   public static int[] kMostFrequent(int[] a, int k){ //BROKEN!!!!!!!!!!!
       int[] ans = new int[k];
       int temp = 0;
-      int duplicateCount = 0;
-      int tempNegative = 0;
       int[] checked = new int[100];
-      for(int o = 0; o < k; o++){
-         for(int i = 0; i < a.length; i++){
-            temp = a[i];
-            tempNegative = temp;
-            if(temp < 0)
-               tempNegative += 50;
-   
-               for(int e = 0; e < a.length; e++){
-                  if(temp == a[e] && e > i)
-                     duplicateCount++;
-               }
-            checked[tempNegative]++;
+      
+      for(int i = 0; i < k; i++){
+         for(int e = 0; e < a.length; e++){
+            if(a[e] > 0)
+               temp = a[e];
+            else
+               temp = (a[e] + 50);
+            
+            checked[temp]++;
          }
          temp = 0;
-         boolean[] done = new boolean[100];
-         for(int i = 0; i < 100; i++){
-            for(int e = 0; e < k; e++){
-               if(ans[e] == temp)
-                  done[e] = true;
-            }
-            if(checked[i] > temp && done[checked[i]] == false)
-               temp = checked[i];
+         for(int e = 0; e < checked.length; e++){
+            if(checked[e] > temp)
+               temp = e; 
          }
-         ans[o] = temp;
+         ans[i] = a[temp];
+      }        
+      return ans;
+   }
+   
+   public static boolean isMonotonic(int[] a){
+      boolean ans = true;
+      boolean up = false;
+      
+      if(a[1] > a[0] && a.length > 2)
+         up = true;
+      else if(a[1] == a[0] && a.length > 2){
+         if(a[2] > a[1])
+            up = true;
       }
+      if(up == true && a.length > 2){
+         for(int i = 1; i < a.length; i++){
+            if(a[i] < a[i-1])
+               ans = false;
+         }
+      } else if (up == false && a.length > 2){
+        for(int i = 1; i < a.length; i++){
+            if(a[i] > a[i-1])
+               ans = false;
+         } 
+      }
+       
       return ans;
    }
    

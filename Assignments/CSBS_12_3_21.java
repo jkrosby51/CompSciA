@@ -28,7 +28,7 @@ public class CSBS_12_3_21{
       while(running == false){
          System.out.println("Which method would you like to run?");
          System.out.println("Enter the number matching your selection.");
-         System.out.println("1. countWords \n2. countDuplicates \n3. contains \n4. kMostFrequent \n5. isMonotonic");
+         System.out.println("1. countWords \n2. countDuplicates \n3. contains \n4. kMostFrequent \n5. isMonotonic \n6. numUnique");
          methodNum = input.nextInt();
          input.nextLine();
          
@@ -206,6 +206,35 @@ public class CSBS_12_3_21{
             System.out.print("isMonotonic = " + ans + ".");
             
             wait(2000);
+         } else if(methodNum == 6) {                   // numUnique
+            ArrayList<Integer> numSet = new ArrayList<Integer>();
+            int temp = 0;
+            System.out.println("Enter a sorted array of numbers.");
+            for(int i = 0; temp != -1; i++){
+               System.out.print("Insert a number between 1 and 50, or type -1 to quit: ");
+               temp = input.nextInt();
+         
+               if(temp >= 1 && temp <= 50){
+                     numSet.add(temp);
+               }else if(temp != -1)
+                  System.out.println("Only values between 1 and 50 are counted.");
+            }  
+            int arrayLength = numSet.size();
+            int a[] = new int[arrayLength];
+            for(int i = 0; i < arrayLength; i++)
+               a[i] = numSet.get(i);
+            
+            System.out.println("Running numUnique(array[])");
+            int rndmNum = random.nextInt(8 - 4) + 1;
+            for(int e = 0; e <= rndmNum; e++){
+               System.out.print(". ");
+               wait(random.nextInt(750 - 400) + 1);
+            }
+            System.out.println("\n");
+            int ans = numUnique(a);
+            System.out.print("There are " + ans + " unique numbers in the array.");
+            
+            wait(2000);
          } else {
             System.out.println("Invalid Number. Try again.");
          
@@ -295,24 +324,41 @@ public class CSBS_12_3_21{
       boolean ans = true;
       boolean up = false;
       
-      if(a[1] > a[0] && a.length > 2)
+      if(a.length < 2)
+         return true;
+      
+      if(a[1] > a[0])
          up = true;
-      else if(a[1] == a[0] && a.length > 2){
+      else if(a[1] == a[0]){
          if(a[2] > a[1])
             up = true;
       }
-      if(up == true && a.length > 2){
+      if(up == true){
          for(int i = 1; i < a.length; i++){
             if(a[i] < a[i-1])
                ans = false;
          }
-      } else if (up == false && a.length > 2){
+      } else if (up == false){
         for(int i = 1; i < a.length; i++){
             if(a[i] > a[i-1])
                ans = false;
          } 
       }
        
+      return ans;
+   }
+   
+   public static int numUnique(int[] a){
+      int ans = 1;
+      
+      if(a.length < 2)
+         return a.length;
+      
+      for(int i = 1; i < a.length; i++){
+         if(a[i] != a[i-1])
+            ans++;
+      }
+      
       return ans;
    }
    

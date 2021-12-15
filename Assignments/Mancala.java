@@ -130,9 +130,10 @@ public class Mancala{
                board[7] += board[i] + board[topBot.get(i)];
                board[i] = 0;
                board[topBot.get(i)] = 0;
-            if(i != 7)
-               turn = 2;
             }
+            if(i != 7)
+               turn = 7;
+            
          }
          //endGame = gameStatus(board, turn);
          while(singleplayer == true && turn == 2){
@@ -160,9 +161,10 @@ public class Mancala{
                board[0] += board[i] + board[topBot.get(i)];
                board[i] = 0;
                board[topBot.get(i)] = 0;
+            }
             if(i != 0)
                turn = 1;
-            } 
+             
          }
       }
       printBoard(board, turn);
@@ -206,7 +208,7 @@ public class Mancala{
    }
    
    public final static void clearConsole(){
-      System.out.println(new String(new char[50]).replace("\0", "\r\n"));
+      //System.out.println(new String(new char[50]).replace("\0", "\r\n"));
    }
    public static void wait(int ms){
        try

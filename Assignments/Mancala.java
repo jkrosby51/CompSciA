@@ -135,6 +135,7 @@ public class Mancala{
             charInput = input.next().charAt(0);
             charInput = Character.toLowerCase(charInput);
             intInput = hm.get(charInput);
+            intInput = topBot.get(intInput);
             
             amount = board[intInput];
             board[intInput] = 0;
@@ -150,9 +151,9 @@ public class Mancala{
             i--;
             //System.out.println("i: " + i);
             if(board[i] == 1 && i != 0){
-               board[0] += board[i] + board[topBot.get(i)];
+               board[0] += board[i] + board[topBot.getKey(i)];
                board[i] = 0;
-               board[topBot.get(i)] = 0;
+               board[topBot.getKey(i)] = 0;
             if(i != 0)
                turn = 1;
             } 
@@ -199,9 +200,7 @@ public class Mancala{
    }
    
    public final static void clearConsole(){
-      for(int i = 0; i < 20; i++){
-      System.out.println("");
-      }
+      System.out.println(new String(new char[50]).replace("\0", "\r\n"));
    }
    public static void wait(int ms){
        try

@@ -98,6 +98,12 @@ public class Mancala{
         topBot.put(4, 10);
         topBot.put(5, 9);
         topBot.put(6, 8);
+        topBot.put(8, 6);
+        topBot.put(9, 5);
+        topBot.put(10, 4);
+        topBot.put(11, 3);
+        topBot.put(12, 2);
+        topBot.put(13, 1);
 
       
       
@@ -151,9 +157,9 @@ public class Mancala{
             i--;
             //System.out.println("i: " + i);
             if(board[i] == 1 && i != 0){
-               board[0] += board[i] + board[topBot.getKey(i)];
+               board[0] += board[i] + board[topBot.get(i)];
                board[i] = 0;
-               board[topBot.getKey(i)] = 0;
+               board[topBot.get(i)] = 0;
             if(i != 0)
                turn = 1;
             } 

@@ -142,8 +142,12 @@ public class Mancala{
                board[topBot.get(i)] = 0;
             }
             if(i != 7)
+<<<<<<< HEAD
                turn = 2;
             endGame = gameStatus(board, turn);
+=======
+               turn = 7;
+>>>>>>> 32e801e0d4edfaf7220d982cc836ecf66b1247a4
             
          }
          //endGame = gameStatus(board, turn);
@@ -154,6 +158,7 @@ public class Mancala{
             charInput = Character.toLowerCase(charInput);
             intInput = hm.get(charInput);
             intInput = topBot.get(intInput);
+<<<<<<< HEAD
             
             amount = board[intInput];
             board[intInput] = 0;
@@ -187,6 +192,8 @@ public class Mancala{
             charInput = Character.toUpperCase(charInput);
             
             System.out.println("Player 2 has to decided to take '" + charInput + "'");
+=======
+>>>>>>> 32e801e0d4edfaf7220d982cc836ecf66b1247a4
             
             amount = board[intInput];
             board[intInput] = 0;
@@ -208,9 +215,13 @@ public class Mancala{
             }
             if(i != 0)
                turn = 1;
+<<<<<<< HEAD
             endGame = gameStatus(board, turn);
             
             
+=======
+             
+>>>>>>> 32e801e0d4edfaf7220d982cc836ecf66b1247a4
          }
          endGame = gameStatus(board, turn);
          System.out.println("endGame == " + endGame);

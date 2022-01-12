@@ -1,6 +1,4 @@
 /*    ------BUGS-------
-   - Player 2 uses Player 1's board
-   - Singleplayer/Multiplayer is opposite of what the menu says
    - Probably like 20 more things i either forgot about or haven't found yet
 */
 
@@ -38,7 +36,7 @@ public class Mancala{
             wait(1500);
             System.out.println("\n");
             winner = playGame(singleplayer);
-            System.out.println("Winner: " + winner);
+            System.out.println("Player " + winner + " is the winner!");
             //clearConsole();
          } else if(userInput == 2){
             System.out.println("Players sit on opposite sides with the large bin to a player's right designated their home bin. On a turn, \na player selects on of the six pits to remove the stones from and then 'sows' the stones counterclock-\nwise around the board, placing one stone in each pit including the player's home bin (but excluding \nthe opponent's home bin). If the last stone lands in the player's home bin, the player gets another turn. \nIf the last stone lands in an empty pit on the player's side of the board, the player takes all stones in \nthe corresponding pit on the oppponent's side and places them in the player's home bin. When a player \ncannot play, the game is over and all stones remaining in the opponent's pits go to the oppoenent's home \nbin. The winner is the player with the most stones in the player's home bin at the end of the game.\n\n");
@@ -81,6 +79,7 @@ public class Mancala{
       int e = 0;
       int amount = 0;
       boolean endGame = false;
+      boolean badAiStopper = true;
       
       Map<Character, Integer> hm
             = new HashMap<Character, Integer>();
@@ -119,11 +118,12 @@ public class Mancala{
       
       
       while(endGame == false){
-         while(turn == 1){
+         while(turn == 1 && endGame == false){
             printBoard(board, turn);
             System.out.println("Player 1, which pit would you like to take? Enter the associated letter.");
             charInput = input.next().charAt(0);
             charInput = Character.toLowerCase(charInput);
+            intInput = hm.get(charInput);
             
             amount = board[intInput];
             board[intInput] = 0;
@@ -136,29 +136,22 @@ public class Mancala{
             }
             i--;
             //System.out.println("i: " + i);
-            if(board[i] == 1 && i != 7){
-               board[7] += board[i] + board[topBot.get(i)];
-               board[i] = 0;
+            if(board[i] == 1 && i < 7 && i > 0){
+               board[7] += board[topBot.get(i)];
                board[topBot.get(i)] = 0;
             }
             if(i != 7)
-<<<<<<< HEAD
                turn = 2;
-            endGame = gameStatus(board, turn);
-=======
-               turn = 7;
->>>>>>> 32e801e0d4edfaf7220d982cc836ecf66b1247a4
-            
          }
-         //endGame = gameStatus(board, turn);
-         while(singleplayer == false && turn == 2){
+         endGame = gameStatus(board, turn);
+         while(singleplayer == false && turn == 2 && endGame == false){
             printBoard(board, turn);
             System.out.println("Player 2, which pit would you like to take? Enter the associated letter.");
             charInput = input.next().charAt(0);
             charInput = Character.toLowerCase(charInput);
             intInput = hm.get(charInput);
             intInput = topBot.get(intInput);
-<<<<<<< HEAD
+
             
             amount = board[intInput];
             board[intInput] = 0;
@@ -173,63 +166,63 @@ public class Mancala{
             }
             i--;
             //System.out.println("i: " + i);
-            if(board[i] == 1 && i != 0){
-               board[0] += board[i] + board[topBot.get(i)];
-               board[i] = 0;
+            if(board[i] == 1 && i > 7 && i < 14){
+               board[0] += board[topBot.get(i)];
                board[topBot.get(i)] = 0;
             }
             if(i != 0)
                turn = 1;
-            endGame = gameStatus(board, turn);
              
-         }
-         while(singleplayer == true && turn == 2){
-            printBoard(board, turn);
-            
-            intInput = random.nextInt(6 - 1) + 1;
-            charInput = hmReverse.get(intInput);
-            intInput = topBot.get(intInput);
-            charInput = Character.toUpperCase(charInput);
-            
-            System.out.println("Player 2 has to decided to take '" + charInput + "'");
-=======
->>>>>>> 32e801e0d4edfaf7220d982cc836ecf66b1247a4
-            
-            amount = board[intInput];
-            board[intInput] = 0;
-            e = 0;
-            for(i = (intInput+1); e < amount; i++){
-               if(i == 14)
-                  i = 0;
-               if(i == 7)
-                  i = 8;
-               board[i]++;
-               e++;
-            }
-            i--;
-            //System.out.println("i: " + i);
-            if(board[i] == 1 && i != 0){
-               board[0] += board[i] + board[topBot.get(i)];
-               board[i] = 0;
-               board[topBot.get(i)] = 0;
-            }
-            if(i != 0)
-               turn = 1;
-<<<<<<< HEAD
-            endGame = gameStatus(board, turn);
-            
-            
-=======
-             
->>>>>>> 32e801e0d4edfaf7220d982cc836ecf66b1247a4
          }
          endGame = gameStatus(board, turn);
-         System.out.println("endGame == " + endGame);
+         while(singleplayer == true && turn == 2 && endGame == false){
+            printBoard(board, turn);
+            
+            badAiStopper = true;
+            while(badAiStopper == true){
+               intInput = random.nextInt(6 - 1) + 1;
+               //System.out.println("intInput: " + intInput);
+               charInput = hmReverse.get(intInput);
+               //System.out.println("charInput: " + charInput);
+               intInput = topBot.get(intInput);
+               //System.out.println("intInput: " + intInput);
+               charInput = Character.toUpperCase(charInput);
+               //System.out.println("charInput: " + charInput);
+               
+               if(board[intInput] != 0)
+                  badAiStopper = false;
+            }
+            
+            System.out.println("Player 2 has to decided to take '" + charInput + "'");
+
+            
+            amount = board[intInput];
+            board[intInput] = 0;
+            e = 0;
+            for(i = (intInput+1); e < amount; i++){
+               if(i == 14)
+                  i = 0;
+               if(i == 7)
+                  i = 8;
+               board[i]++;
+               e++;
+            }
+            i--;
+            //System.out.println("i: " + i);
+            if(board[i] == 1 && i > 7 && i < 14){
+               board[0] += board[topBot.get(i)];
+               board[topBot.get(i)] = 0;
+            }
+            if(i != 0)
+               turn = 1;
+         }
+         endGame = gameStatus(board, turn);
       }
       printBoard(board, turn);
-      
-         
-      
+      board = piecesLeft(board, turn);
+      winner = winner(board);
+      System.out.print("\n\n");
+      printBoard(board, turn);
       
       return winner;
    }
@@ -266,6 +259,34 @@ public class Mancala{
       return endGame;
    }
    
+   public static int[] piecesLeft(int[] board, int turn){
+      int p1 = 0;
+      int p2 = 0;
+      
+      for(int i = 13; i > 7; i--){
+         p2 += board[i];
+         board[i] = 0;
+      }
+      board[0] += p2;
+      
+      for(int i = 1; i < 7; i++){
+         p1 += board[i];
+         board[i] = 0;
+      }
+      board[7] += p1;
+      
+      return board;
+   }
+   public static int winner(int[] board){
+      int winner = 0;
+      if(board[0] > board[7])
+         winner = 2;
+      else if(board[7] > board[0])
+         winner = 1;
+      
+      return winner;
+   }
+   
    public final static void clearConsole(){
       //System.out.println(new String(new char[50]).replace("\0", "\r\n"));
    }
@@ -280,7 +301,5 @@ public class Mancala{
        }
    
   }
-   
-   
    
 }

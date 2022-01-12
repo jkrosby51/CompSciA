@@ -4,7 +4,6 @@ public class Convert{
    String num1, num2;
    int base1, base2, firstNum, secondNum;
 
- 
    public int convertToBase10( int base, String number){
       
       
@@ -33,3 +32,8 @@ public class Convert{
    }
 
 }
+/*
+TO-DO:
+- Convert all numbers to a common type
+- run math
+- write out equation with conversions  

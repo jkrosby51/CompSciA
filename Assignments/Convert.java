@@ -43,7 +43,7 @@ public class Convert
          base1 = input.nextInt();
          input.nextLine();
          if(base1 > 16 || base1 < 2)
-               System.out.println("Invalid Input");
+               System.out.println(" Invalid Input");
       }
       System.out.print(" Enter the first number : ");
       num1 = input.nextLine();
@@ -52,7 +52,7 @@ public class Convert
          base2 = input.nextInt();
          input.nextLine();
          if(base2 > 16 || base2 < 2)
-               System.out.println("Invalid Input");
+               System.out.println(" Invalid Input");
       }
       System.out.print(" Enter the second number : ");
       num2 = input.nextLine();
@@ -74,7 +74,7 @@ public class Convert
          else if(operation.equals("/"))
             thirdNum = firstNum / secondNum;
          else {
-            System.out.println("This is not a valid operation");
+            System.out.println(" This is not a valid operation");
             badOperation = true;
          }
       }
@@ -83,7 +83,7 @@ public class Convert
             base3 = input.nextInt();
             input.nextLine();
             if(base3 > 16 || base3 < 2)
-               System.out.println("Invalid Input");
+               System.out.println(" Invalid Input");
       }
       
       num3 = convertToBaseVar(base3, thirdNum);
